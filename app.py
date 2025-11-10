@@ -252,21 +252,25 @@ with tab4:
                 st.write(f"- {step}")
             
             # Forecast
-            if st.session_state.selected_model == 'ARIMA':
-                forecast, model = forecast_arima(preprocessed.iloc[:, 0], st.session_state.params)
-            elif st.session_state.selected_model == 'Prophet':
-                forecast, model = forecast_prophet(preprocessed.iloc[:, 0], st.session_state.params)
-            elif st.session_state.selected_model == 'Exponential Smoothing':
-                forecast, model = forecast_exponential_smoothing(preprocessed.iloc[:, 0], st.session_state.params)
-            elif st.session_state.selected_model == 'VAR':
-                forecast, model = forecast_var(preprocessed, st.session_state.params)
-            elif st.session_state.selected_model == 'Random Forest':
-                forecast, model = forecast_rf(preprocessed, st.session_state.params)
-            elif st.session_state.selected_model == 'LSTM':
-                if st.session_state.data_type == 'univariate':
-                    forecast, model = forecast_lstm(preprocessed.iloc[:, 0], st.session_state.params)
-                else:
-                    forecast, model = forecast_lstm(preprocessed, st.session_state.params)
+            try:
+                if st.session_state.selected_model == 'ARIMA':
+                    forecast, model = forecast_arima(preprocessed.iloc[:, 0], st.session_state.params)
+                elif st.session_state.selected_model == 'Prophet':
+                    forecast, model = forecast_prophet(preprocessed.iloc[:, 0], st.session_state.params)
+                elif st.session_state.selected_model == 'Exponential Smoothing':
+                    forecast, model = forecast_exponential_smoothing(preprocessed.iloc[:, 0], st.session_state.params)
+                elif st.session_state.selected_model == 'VAR':
+                    forecast, model = forecast_var(preprocessed, st.session_state.params)
+                elif st.session_state.selected_model == 'Random Forest':
+                    forecast, model = forecast_rf(preprocessed, st.session_state.params)
+                elif st.session_state.selected_model == 'LSTM':
+                    if st.session_state.data_type == 'univariate':
+                        forecast, model = forecast_lstm(preprocessed.iloc[:, 0], st.session_state.params)
+                    else:
+                        forecast, model = forecast_lstm(preprocessed, st.session_state.params)
+            except RuntimeError as e:
+                st.error(f"Forecasting failed: {e}")
+                st.stop()
             
             # Metrics (dummy, since no actual future data)
             # For demo, use last part as test

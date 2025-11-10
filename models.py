@@ -94,6 +94,8 @@ def forecast_var(data, params):
         forecast = model_fit.forecast(data.values[-params['lags']:], steps=params['steps'])
         forecast_df = pd.DataFrame(forecast, columns=data.columns)
         return forecast_df, model_fit
+    except np.linalg.LinAlgError as e:
+        raise RuntimeError(f"VAR forecasting failed due to numerical instability (e.g., singular matrix). Try using a different model, reducing lags, or ensuring data is stationary and has sufficient observations.")
     except Exception as e:
         raise RuntimeError(f"VAR forecasting failed: {e}")
 
