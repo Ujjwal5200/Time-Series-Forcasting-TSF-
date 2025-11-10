@@ -36,30 +36,10 @@ In an era of big data and AI, the ability to forecast trends is more relevant th
 - **Downloadable Reports**: Export forecast results and model details for offline use.
 - **Session State Management**: Maintains data and selections across app interactions for a seamless experience.
 
-## Installation
 
-### Prerequisites
-- Python 3.7 or higher
-- pip (Python package installer)
-
-### Steps
-1. Clone or download the repository:
-   ```
-   git clone https://github.com/your-username/time-series-forecasting-app.git
-   cd time-series-forecasting-app
    ```
 
-2. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
 
-3. Run the app:
-   ```
-   streamlit run app.py
-   ```
-
-4. Open your browser and navigate to the local URL (usually `http://localhost:8501`).
 
 ## Usage
 
